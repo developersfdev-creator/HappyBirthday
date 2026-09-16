@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise 💕</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap');
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:'DM Sans',sans-serif}body{background:#fff6fa;color:#39233b;overflow-x:hidden}
+.screen{min-height:100vh;display:none;position:relative;padding:28px 20px 90px;overflow:hidden}.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+#home{background:radial-gradient(circle at 50% 85%,#ffb4c8 0,#8f4f91 38%,#151b42 78%);color:white}.card{width:min(760px,94vw);background:rgba(255,255,255,.94);border-radius:30px;padding:34px;box-shadow:0 20px 70px rgba(62,24,67,.22);text-align:center}
+h1{font-family:Pacifico,cursive;font-size:clamp(42px,8vw,76px);line-height:1.05;margin:15px 0}h2{font-size:clamp(27px,5vw,42px);margin:8px 0 12px}p{line-height:1.7}.kicker{letter-spacing:2px;text-transform:uppercase;font-size:12px;font-weight:700;opacity:.8}
+.btn{border:0;border-radius:999px;padding:15px 25px;font-size:16px;font-weight:700;cursor:pointer;background:#f05f8c;color:white;box-shadow:0 9px 22px rgba(240,95,140,.3);transition:.2s}.btn:hover{transform:translateY(-2px)}.btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+#gallery{background:linear-gradient(135deg,#182047,#714c87);color:white}#gallery .card{background:rgba(255,255,255,.1);color:white;backdrop-filter:blur(12px)}
+#cake{background:radial-gradient(circle at 50% 40%,#54335f,#17152f 70%);color:white}.cake{font-size:130px;filter:drop-shadow(0 15px 25px #0008);animation:bob 2.5s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px)}}
+.note{background:#fff5df;color:#563e2e;padding:30px;border-radius:8px;box-shadow:0 18px 45px #0004;transform:rotate(-2deg);font-family:Pacifico,cursive;font-size:25px;line-height:1.7}.message{font-family:Pacifico,cursive;font-size:23px;line-height:1.8;text-align:left;background:#fffafc;border:1px solid #f1d5df;padding:25px;border-radius:18px;white-space:pre-wrap}
+.preview{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:24px}.polaroid{background:white;padding:9px 9px 18px;box-shadow:0 8px 22px #542b5c1f;transform:rotate(var(--r));border-radius:3px}.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.caption{font-family:Pacifico,cursive;text-align:center;margin-top:8px;color:#684368}
+.music{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);width:min(620px,92vw);background:rgba(255,255,255,.95);border-radius:999px;padding:10px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px #2b12351f;z-index:20}.music span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}.music audio{width:45%}
+.heart{position:fixed;bottom:-30px;animation:rise linear forwards;pointer-events:none;z-index:2}@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}.confetti{position:fixed;width:8px;height:14px;top:-20px;z-index:30;animation:fall 3s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:600px){.card{padding:25px 19px}.music audio{width:38%}.cake{font-size:100px}.message{font-size:20px}}
+</style>
+</head>
+<body>
+<section class="screen active" id="home">
+ <div class="card" style="background:rgba(20,22,61,.35);color:white;border:1px solid #ffffff33">
+  <div class="kicker">A little website for a very special person ✨</div>
+  <h1>Hey, <span id="nameHome">Beautiful</span>! 💕</h1>
+  <p>Today is your day — and I made you a tiny corner of the internet filled with memories, music and a little surprise.</p>
+  <button class="btn" onclick="startExperience()">🎁 Open Your Surprise</button>
+  <p style="font-size:13px;opacity:.7">Just tap the button and enjoy. ❤️</p>
+ </div>
+</section>
+
+<section class="screen" id="gallery">
+ <div class="card">
+  <div class="kicker">A few moments worth keeping</div><h2>Our little gallery 📸</h2>
+  <div id="finalGallery" class="preview"></div>
+  <div class="btnrow"><button class="btn" onclick="go('letter')">Read your letter 💌</button></div>
+ </div>
+</section>
+
+<section class="screen" id="letter">
+ <div class="card">
+  <div class="kicker">For you</div>
+  <div class="message">Today is all about you... 💗
+
+I just wanted to remind you how special you are.
+
+Thank you for all the little moments, the laughs, and the memories. I hope this year brings you everything you deserve and more.
+
+Happy Birthday! ❤️</div>
+  <div class="btnrow"><button class="btn" onclick="go('cake')">One last surprise 🎁</button></div>
+ </div>
+</section>
+
+<section class="screen" id="cake">
+ <div class="card" style="background:rgba(255,255,255,.08);color:white">
+  <div class="kicker">Make a wish...</div><h2>Happy Birthday, <span>Beautiful</span>! 🎂</h2>
+  <div class="cake" id="cakeEmoji">🎂</div>
+  <p>Close your eyes, make a wish, and tap the button. ✨</p>
+  <button class="btn" onclick="blowCandles()">🕯️ Blow the Candles</button>
+  <div id="wish" style="display:none;margin-top:25px"><div class="note">You deserve more happiness than you can imagine. Keep smiling, keep shining, and never forget how loved you are. ❤️</div><div class="btnrow"><button class="btn" onclick="celebrate()">Keep Shining ✨</button></div></div>
+ </div>
+</section>
+
+<div class="music" id="musicBar">🎵 <span>Birthday vibes</span><audio id="audio" controls loop></audio></div>
+<script>
+const PHOTO_FILES=['photo1.jpg','photo2.jpg','photo3.jpg','photo4.jpg','photo5.jpg','photo6.jpg','photo7.jpg','photo8.jpg'];
+const MUSIC_FILE='assets/music/birthday.mp3';
+const $=id=>document.getElementById(id);
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0)}
+function startExperience(){loadPhotos();loadMusic();go('gallery');burstHearts();}
+function loadPhotos(){const box=$('finalGallery');box.innerHTML='';let found=0;PHOTO_FILES.forEach((file,i)=>{const img=new Image();img.onload=()=>{found++;const d=document.createElement('div');d.className='polaroid';d.style.setProperty('--r',((i%3)-1)*2+'deg');d.innerHTML='<img src="assets/photos/'+file+'" alt="Memory '+(i+1)+'"><div class="caption">A favourite memory ❤️</div>';box.appendChild(d)};img.onerror=()=>{};img.src='assets/photos/'+file;});setTimeout(()=>{if(!found&&!box.children.length)box.innerHTML='<p>No photos found yet. Add photo1.jpg, photo2.jpg, etc. to <b>assets/photos/</b>.</p>'},900)}
+function loadMusic(){const audio=$('audio');audio.src=MUSIC_FILE;audio.oncanplay=()=>{$('musicBar').classList.add('show');audio.play().catch(()=>{});};audio.onerror=()=>{};}
+function blowCandles(){$('cakeEmoji').textContent='🍰';$('wish').style.display='block';confetti();burstHearts()}
+function celebrate(){confetti(80);burstHearts()}
+function burstHearts(){for(let i=0;i<8;i++)setTimeout(()=>{const h=document.createElement('div');h.className='heart';h.textContent=['♥','♡','✨','💕'][Math.floor(Math.random()*4)];h.style.left=Math.random()*100+'vw';h.style.fontSize=(15+Math.random()*25)+'px';h.style.animationDuration=(4+Math.random()*4)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),8000)},i*250)}
+function confetti(n=45){for(let i=0;i<n;i++){const c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.background=['#f05f8c','#ffd166','#8bd3dd','#b8a0d9','#ff9f68'][i%5];c.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),4000)}}
+</script>
+</body>
+</html>
